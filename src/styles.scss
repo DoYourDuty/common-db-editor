@@ -1,0 +1,56 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/ag-grid-community/dist/styles/ag-grid.css";
+@import "../node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css";
+@import "../node_modules/ag-grid-community/dist/styles/ag-theme-alpine-dark.css";
+@import "../node_modules/ag-grid-community/dist/styles/ag-theme-balham-dark.css";
+@import "../node_modules/ag-grid-community/dist/styles/ag-theme-balham.css";
+@import "../node_modules/ag-grid-community/dist/styles/ag-theme-material.css";
+
+
+.ag-row-hover {
+  /* putting in !important so it overrides the theme's styling as it hovers the row also */
+  background-color: #dfdfff !important;
+}
+
+mat-tab-header{
+  height: 35px !important;
+}
+.mat-expansion-panel-header.mat-expanded {
+  height: 35px !important;
+  background-color: #3f51b5 !important;
+}
+.mat-expansion-panel{
+  background-color: #3f51b5 !important;
+}
+.mat-expansion-panel-body{
+  padding: 0% !important;
+}
+
+.mat-expansion-indicator::after{
+  color: lightgray !important;
+}
+
+
+.mat-expansion-panel-header-title, .mat-expansion-panel-header-description,.mat-expansion-indicator {
+  color: lightgray !important;
+}
+
+.sick-days-warning {
+  background-color: sandybrown !important;
+}
+
+.sick-days-breach {
+  background-color: lightcoral !important;
+}
+
+.sick-days-add {
+  background-color: lightgreen !important;
+}
+
+html, body { height: 100%; width: 100%; margin: 0; }
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

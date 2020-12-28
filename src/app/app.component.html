@@ -1,0 +1,55 @@
+<div>
+  <mat-tab-group style="margin: 0px 0px 10px 0px;" color="primary" backgroundColor="primary" dynamicHeight>
+    <mat-tab label="Options">
+
+      <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle value="GetSelectedRows" (click)="getSelectedRows()">Get Selected Rows</mat-button-toggle>
+        <mat-button-toggle value="ClearSelection" (click)="myGrid.api.deselectAll()">Clear Selection</mat-button-toggle>
+        <mat-button-toggle value="Remove" (click)="onRemoveSelected()">Remove / Keep Selected Item</mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <!-- <button class="btn btn-primary" (click)="onBtStopEditing()">
+        Stop Editing
+      </button>
+      <button class="btn btn-primary" (click)="onRemoveSelected()">
+        Remove/Keep Selected
+      </button> -->
+    </mat-tab>
+    <mat-tab label="Update">
+      <div style="margin: 20px;">
+        <app-dynamic-complete #appDynamicCompleteUpdate id="appDynamicCompleteUpdate">loading
+        </app-dynamic-complete>
+        <button style=" margin : 5px;" mat-raised-button color="primary" (click)="UpdateData()">Update</button>
+      </div>
+    </mat-tab>
+    <mat-tab label="Add">
+      <div style="margin: 20px;">
+        <app-dynamic-complete #appDynamicCompleteAdd id="appDynamicCompleteAdd">loading</app-dynamic-complete>
+        <button style=" margin : 5px;" mat-raised-button color="primary" (click)="AddData()">Add</button>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <mat-divider></mat-divider>
+  <mat-accordion>
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header color="primary" backgroundColor="primary">
+        <mat-panel-title>
+          Table View
+        </mat-panel-title>
+        <mat-panel-description>
+          Click To Expend / Collapse
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <ag-grid-angular #myGrid id="myGrid1" #agGrid style=" width: 100%; height: 750px;"
+        (selectionChanged)="onSelectionChanged($event)" id="myGrid" class="ag-theme-material"
+        [defaultColDef]="defaultColDef" [rowData]="rowData" row-animation [rowHeight]="rowHeight"
+        (rowClicked)="onCellClicked($event)" [editType]="editType" [columnDefs]="columnDefs"
+        [rowClassRules]="rowClassRules" (gridReady)="onGridReady($event)" (rowValueChanged)="onEditRow($event)"
+        [enableFillHandle]="true" [undoRedoCellEditing]="true" [undoRedoCellEditingLimit]="undoRedoCellEditingLimit"
+        [enableCellChangeFlash]="true" [pagination]="true" [paginationAutoPageSize]="true" rowSelection="multiple">
+      </ag-grid-angular>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+</div>

@@ -1,0 +1,117 @@
+[
+  {
+    "type": "text",
+    "name": "firstName",
+    "ui": { "label": "First Name" },
+    "validators": { "required": true }
+  },
+  {
+    "type": "text",
+    "name": "middleName",
+    "ui": {
+      "description": "Conditional validation will be applied if the user enter 'Bharat' in 'FirstName' field Conditional Expression with type 'function'",
+      "label": "Middle Name"
+    },
+    "validators": null
+  },
+  {
+    "type": "text",
+    "name": "lastName",
+    "ui": {
+      "description": "Conditional validation will be applied if the user enter 'Bharat' in 'FirstName' field Conditional Expression with type 'string'",
+      "label": "Last Name"
+    },
+    "validators": {
+      "required": { "conditionalExpression": "x => x.firstName == \"Bharat\"" }
+    }
+  },
+  {
+    "type": "text",
+    "name": "userName",
+    "ui": {
+      "description": "Shows Custom Validation Message.",
+      "label": "UserName"
+    },
+    "validators": { "required": { "message": "Username cannot be blank." } }
+  },
+  {
+    "type": "text",
+    "name": "fullName",
+    "ui": {
+      "description": "Shows Custom Validation Message based on message key",
+      "label": "Full Name"
+    },
+    "validators": { "required": { "messageKey": "requiredMessageKey" } }
+  }
+]
+
+
+
+
+import { Component, OnInit } from "@angular/core";
+    import {
+      DynamicFormBuildConfig,
+      DynamicFormConfiguration,
+      RxDynamicFormBuilder
+    } from "@rxweb/reactive-dynamic-forms";
+    import { ReactiveFormConfig } from "@rxweb/reactive-form-validators";
+
+    @Component({
+      selector: "app-dynamic-complete",
+      templateUrl: "./dynamic-complete.component.html"
+    })
+    export class DynamicCompleteComponent implements OnInit {
+      public serverData = [];
+      // [
+      //   {
+      //     name: "firstName",
+      //     type: "text"
+      //   },
+      //   {
+      //     name: "test",
+      //     type: "text"
+      //   },
+      //   {
+      //     name: "test1",
+      //     type: "text"
+      //   }
+      // ];
+
+      uiBindings: string[]; //= ["firstName", "test", "test1"];
+      dynamicFormBuildConfig: DynamicFormBuildConfig;
+      obj = { success: "", test2: "", test3: "" };
+      constructor(private formBuilder: RxDynamicFormBuilder) {
+        var keys = Object.keys(this.obj);
+        let ser = [];
+        let ser1 = [];
+        keys.forEach(function(value: any) {
+          ser.push({
+            name: value,
+            type: "text",
+            ui: { label: value },
+            validators: { required: true }
+          });
+          ser1.push(value);
+        });
+        this.serverData = ser;
+        this.uiBindings = ser1;
+        console.log(this.serverData);
+      }
+      ngOnInit() {
+        ReactiveFormConfig.set({
+          validationMessage: { required: "This field is required" }
+        });
+        this.dynamicFormBuildConfig = this.formBuilder.formGroup(
+          this.serverData,
+          {}
+        );
+      }
+      getSelectedRows() {
+        let obj1 = this.obj;
+        this.serverData.forEach(function(val: any) {
+          obj1[val.name] = val.value;
+        });
+        console.log(this.serverData);
+        console.log(this.obj);
+      }
+    }
